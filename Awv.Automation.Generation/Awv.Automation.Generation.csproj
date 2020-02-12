@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RepositoryUrl>https://github.com/aerawave/Awv.Automation</RepositoryUrl>
+    <PackageTags>aerawave</PackageTags>
+    <PackageProjectUrl>https://github.com/aerawave/Awv.Automation</PackageProjectUrl>
+    <Authors>Joshua Kinzer</Authors>
+    <Company>Aerawave</Company>
+  </PropertyGroup>
+
+</Project>

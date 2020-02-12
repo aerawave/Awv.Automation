@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>Joshua Kinzer</Authors>
+    <Company>Aerawave</Company>
+    <PackageProjectUrl>https://github.com/aerawave/Awv.Automation</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/aerawave/Awv.Automation</RepositoryUrl>
+    <PackageTags>aerawave</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Awv.Automation.Generation" Version="1.0.0" />
+    <PackageReference Include="Awv.Lexica" Version="1.0.7" />
+  </ItemGroup>
+
+</Project>
