@@ -2,6 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>Joshua Kinzer</Authors>
+    <Company>Aerawave</Company>
+    <Product>Awv.Automation.SocialMedia</Product>
+    <Description>Used to automate posts to various social media platforms. Includes: Facebook</Description>
+    <PackageReleaseNotes>Initial release.
+
+Added Facebook support.</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/aerawave/Awv.Automation</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/aerawave/Awv.Automation</RepositoryUrl>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <FileVersion>1.0.1.0</FileVersion>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
