@@ -5,6 +5,7 @@ namespace Awv.Automation.SocialMedia.Facebook.Posts.Statuses
 {
     public class PostPartialSuccess : PostStatus, IPostPartialSuccess
     {
+        public bool Posted { get; set; } = false;
         public PostPartialSuccess(IFacebookPost post, PostData? data)
             : base(post, data) { }
 

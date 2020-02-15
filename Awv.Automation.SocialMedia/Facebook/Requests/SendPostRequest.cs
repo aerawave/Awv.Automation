@@ -48,11 +48,11 @@ namespace Awv.Automation.SocialMedia.Facebook.Requests
                 try
                 {
                     var response = await client.PostAsync(Client.GetUri(Client.GetTarget(), PhotosEndpoint), content);
-                    var json = await response.Content.ReadAsStringAsync();
+                    var responseText = await response.Content.ReadAsStringAsync();
                     if (response.IsSuccessStatusCode)
-                        return new PostSuccess(Post, JsonConvert.DeserializeObject<PostData>(json));
+                        return new PostSuccess(Post, JsonConvert.DeserializeObject<PostData>(responseText));
                     else
-                        return new PostFailure(Post, await response.Content.ReadAsStringAsync());
+                        return new PostFailure(Post, responseText);
                 }
                 catch (Exception ex)
                 {
@@ -157,7 +157,9 @@ namespace Awv.Automation.SocialMedia.Facebook.Requests
                         var response = await client.PostAsync(Client.GetUri(Client.GetTarget(), FeedEndpoint), content);
                         var json = await response.Content.ReadAsStringAsync();
                         if (response.IsSuccessStatusCode)
+                        {
                             return new PostSuccess(Post, JsonConvert.DeserializeObject<PostData>(json));
+                        }
                         else
                             return new PostFailure(Post, await response.Content.ReadAsStringAsync());
                     }

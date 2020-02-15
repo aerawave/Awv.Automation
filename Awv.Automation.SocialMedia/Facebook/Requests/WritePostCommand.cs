@@ -40,7 +40,7 @@ namespace Awv.Automation.SocialMedia.Facebook.Requests
             var guid = Guid.NewGuid();
             var json = new JObject();
             var jsonKey = $"{guid}.json";
-            var jsonPath = Path.Combine(Client.TargetDirectory, PhotosDirectory, jsonKey);
+            var jsonPath = Path.Combine(Client.TargetDirectory, FeedDirectory, jsonKey);
             var directoryPath = Path.GetDirectoryName(jsonPath);
 
             if (!Directory.Exists(directoryPath))
@@ -70,12 +70,11 @@ namespace Awv.Automation.SocialMedia.Facebook.Requests
             var guid = Guid.NewGuid();
             var json = new JObject();
             var jsonKey = $"{guid}.json";
-            var jsonPath = Path.Combine(Client.TargetDirectory, PhotosDirectory, jsonKey);
-            var imagePath = Path.Combine(Client.TargetDirectory, PhotosDirectory, imageKey);
-            var directoryPath = Path.GetDirectoryName(jsonPath);
+            var directoryPath = Path.GetFullPath(Client.TargetDirectory, PhotosDirectory);
+            var jsonPath = Path.Combine(directoryPath, jsonKey);
+            var imagePath = Path.Combine(directoryPath, imageKey);
 
-            if (!Directory.Exists(directoryPath))
-                Directory.CreateDirectory(directoryPath);
+            if (!Directory.Exists(directoryPath)) Directory.CreateDirectory(directoryPath);
 
             using var imageFile = File.Open(imagePath, FileMode.Create);
             using var jsonFile = File.Open(jsonPath, FileMode.Create);
@@ -107,8 +106,7 @@ namespace Awv.Automation.SocialMedia.Facebook.Requests
             var jsonPath = Path.Combine(Client.TargetDirectory, FeedDirectory, jsonKey);
             var directoryPath = Path.GetDirectoryName(jsonPath);
 
-            if (!Directory.Exists(directoryPath))
-                Directory.CreateDirectory(directoryPath);
+            if (!Directory.Exists(directoryPath)) Directory.CreateDirectory(directoryPath);
 
             using var jsonFile = File.Open(jsonPath, FileMode.Create);
             using var jsonWriter = new StreamWriter(jsonFile);

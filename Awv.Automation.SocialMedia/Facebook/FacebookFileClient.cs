@@ -10,7 +10,7 @@ namespace Awv.Automation.SocialMedia.Facebook
         public string TargetDirectory { get; set; }
         public string Target { get; set; }
 
-        public FacebookFileClient(string targetDirectory, string target)
+        public FacebookFileClient(string target, string targetDirectory = ".")
         {
             TargetDirectory = targetDirectory;
             Target = target;
