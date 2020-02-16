@@ -8,9 +8,10 @@
     <Authors>Joshua Kinzer</Authors>
     <Company>Aerawave</Company>
     <Description>Used as a foundation for randomly generated objects and values.</Description>
-    <PackageReleaseNotes>Used as a foundation for randomly generated objects and values.</PackageReleaseNotes>
-    <AssemblyVersion>1.0.1.0</AssemblyVersion>
-    <Version>1.0.1</Version>
+    <PackageReleaseNotes>Added FilePathGenerator</PackageReleaseNotes>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <Version>1.0.2</Version>
+    <FileVersion>1.0.2.0</FileVersion>
   </PropertyGroup>
 
 </Project>
