@@ -16,14 +16,14 @@
 
   <ItemGroup>
     <PackageReference Include="Awv.Automation.Generation" Version="1.0.2" />
-    <PackageReference Include="Awv.Lexica" Version="1.0.9" />
+    <PackageReference Include="Awv.Lexica" Version="1.0.15" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="C:\Users\jaxki\.nuget\packages\awv.lexica\1.0.8\contentFiles\any\netcoreapp3.1\V8_Net_Proxy_x64.dll">
+    <Content Update="C:\Users\jaxki\.nuget\packages\awv.lexica\1.0.15\contentFiles\any\netcoreapp3.1\V8_Net_Proxy_x64.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Update="C:\Users\jaxki\.nuget\packages\awv.lexica\1.0.8\contentFiles\any\netcoreapp3.1\V8_Net_Proxy_x86.dll">
+    <Content Update="C:\Users\jaxki\.nuget\packages\awv.lexica\1.0.15\contentFiles\any\netcoreapp3.1\V8_Net_Proxy_x86.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

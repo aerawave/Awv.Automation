@@ -23,9 +23,18 @@ namespace Awv.Automation.Lexica.Compositional
 
         public AutomationParser(string source) : base(source)
         {
-            Modifiers.Add("L", new ToLower());
-            Modifiers.Add("U", new ToUpper());
-            Modifiers.Add("T", new ToTitle());
+            AllowModifier<ToLower>();
+            AllowModifier<ToUpper>();
+            AllowModifier<ToTitle>();
+        }
+
+        public void AllowModifier<TModifier>() where TModifier : IModifier => AllowModifier(Activator.CreateInstance<TModifier>());
+        public void AllowModifier<TModifier>(string key) where TModifier : IModifier => AllowModifier(key, Activator.CreateInstance<TModifier>());
+        public void AllowModifier(IModifier modifier) => AllowModifier(modifier.Key, modifier);
+        public void AllowModifier(string key, IModifier modifier)
+        {
+            if (Modifiers.ContainsKey(key)) Modifiers[key] = modifier;
+            else Modifiers.Add(key, modifier);
         }
 
         public override char[] GetStringBreakers()
@@ -61,7 +70,7 @@ namespace Awv.Automation.Lexica.Compositional
 
         private TagLexigram ReadTag()
         {
-            var tagMae = ReadTagName();
+            var tagName = ReadTagName();
             var id = (string)null;
 
 
@@ -71,7 +80,7 @@ namespace Awv.Automation.Lexica.Compositional
                 Expect(IdEnd);
             }
 
-            var tag = new TagLexigram(id, tagMae);
+            var tag = new TagLexigram(id, tagName);
 
             while (Expect(ModifierStart, true).HasValue)
                 tag.Modifiers.Add(ReadModifier());
@@ -83,8 +92,7 @@ namespace Awv.Automation.Lexica.Compositional
         private string ReadTagName()
         {
             var breakers = GetTagBreakers();
-            var tagName = ReadWhile(ch => !breakers.Contains(ch) && (TagValidChars.Contains(ch) || char.IsLetterOrDigit(ch)));
-
+            var tagName = ReadWhile(ch => !EndOfString && !breakers.Contains(ch) && (TagValidChars.Contains(ch) || char.IsLetterOrDigit(ch)));
             return tagName;
         }
 
