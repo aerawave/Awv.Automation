@@ -2,6 +2,7 @@
 using Awv.Lexica.Compositional.Interface;
 using Awv.Lexica.Compositional.Lexigrams;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Awv.Automation.Lexica.Compositional.Lexigrams
 {
@@ -38,8 +39,27 @@ namespace Awv.Automation.Lexica.Compositional.Lexigrams
 
         public static explicit operator TagLexigram(string tag) => new TagLexigram(null, tag);
 
-        public override string ToString() =>
-            $"#{Tag}{(Id != null ? (Id == Tag ? "()" : $"({Id})") : "")}";
+        public override string ToString()
+        {
+            var value = new StringBuilder();
+
+            var vv = $"#{Tag}{(Id != null ? (Id == Tag ? "()" : $"({Id})") : "")}";
+
+            value.Append($"#{Tag}");
+
+            if (!string.IsNullOrWhiteSpace(Id))
+            {
+                if (Id == Tag)
+                    value.Append("()");
+                else
+                    value.Append($"({Id})");
+            }
+
+            foreach (var modifier in Modifiers)
+                value.Append($":{modifier.Key}");
+
+            return value.ToString();
+        }
 
         public IEnumerable<IModifier> GetModifiers() => Modifiers;
     }

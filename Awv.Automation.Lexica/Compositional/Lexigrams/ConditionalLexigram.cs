@@ -5,6 +5,7 @@ using Awv.Lexica.Compositional.Lexigrams;
 using Awv.Lexica.Compositional.Lexigrams.Interface;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using V8.Net;
 
 namespace Awv.Automation.Lexica.Compositional.Lexigrams
@@ -42,6 +43,12 @@ namespace Awv.Automation.Lexica.Compositional.Lexigrams
 
         public override object GetValue(ICompositionEngine engine)
         {
+            if (Id != null)
+            {
+                var value = engine.GetProperty(Id);
+                if (value != null)
+                    return value;
+            }
             if (EvaluateChance(engine))
                 return ApplyModifiers(Build(engine));
             else
@@ -57,6 +64,21 @@ namespace Awv.Automation.Lexica.Compositional.Lexigrams
         }
 
         public override string ToString()
-            => $"{{{base.ToString()}}}{(!string.IsNullOrWhiteSpace(Id) ? $"({Id})" : "")}{(ChanceCode.Code.Trim() == "1" || ChanceCode.Code.Trim().ToLower() == "true" ? "" : ChanceCode.ToString())}";
+        {
+            var value = new StringBuilder();
+
+            value.Append($"{{{base.ToString()}}}");
+            if (!string.IsNullOrWhiteSpace(Id))
+                value.Append($"({Id})");
+
+            foreach (var modifier in Modifiers)
+                value.Append($":{modifier.Key}");
+
+            var chanceCode = ChanceCode.Code.Trim().ToLower();
+            if (chanceCode != "1" && chanceCode != "true")
+                value.Append(ChanceCode.ToString());
+
+            return value.ToString();
+        }
     }
 }
