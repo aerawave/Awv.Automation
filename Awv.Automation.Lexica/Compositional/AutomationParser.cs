@@ -13,6 +13,7 @@ namespace Awv.Automation.Lexica.Compositional
         public const char TagStart = '#';
         public const char ConditionalStart = '{';
         public const char ConditionalEnd = '}';
+        public const string TagValidChars = "_";
 
         public AutomationParser(string source) : base(source)
         {
@@ -26,6 +27,11 @@ namespace Awv.Automation.Lexica.Compositional
         public virtual char[] GetTagBreakers()
         {
             return GetStringBreakers().Concat(new char[] { IdStart }).ToArray();
+        }
+
+        public virtual bool IsTagValidChar(char c)
+        {
+            return char.IsLetterOrDigit(c) || TagValidChars.Contains(c);
         }
 
         /// <summary>
@@ -73,22 +79,13 @@ namespace Awv.Automation.Lexica.Compositional
             {
                 var ch = ReadChar();
                 parsing = !EndOfString;
-                switch (ch)
+                if (breakers.Contains(ch) || !IsTagValidChar(ch))
                 {
-                    case EscapeChar:
-                        ch = ReadChar();
-                        parsed.Append(ch);
-                        break;
-                    default:
-                        if (breakers.Contains(ch))
-                        {
-                            parsing = false;
-                        }
-                        else
-                        {
-                            parsed.Append(ch);
-                        }
-                        break;
+                    parsing = false;
+                }
+                else
+                {
+                    parsed.Append(ch);
                 }
             }
             if (!EndOfString) Back();

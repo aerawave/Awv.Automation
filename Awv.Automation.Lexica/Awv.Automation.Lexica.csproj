@@ -8,9 +8,10 @@
     <RepositoryUrl>https://github.com/aerawave/Awv.Automation</RepositoryUrl>
     <PackageTags>aerawave</PackageTags>
     <Description>Essentially an extension to the Awv.Lexica library which adds some more customized modifications to it that suit the needs of the Awv.Automation set of libraries.</Description>
-    <AssemblyVersion>1.0.1.0</AssemblyVersion>
-    <FileVersion>1.0.1.0</FileVersion>
-    <Version>1.0.1</Version>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <FileVersion>1.0.2.0</FileVersion>
+    <Version>1.0.2</Version>
+    <PackageReleaseNotes>Fixed a tag parsing bug</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
