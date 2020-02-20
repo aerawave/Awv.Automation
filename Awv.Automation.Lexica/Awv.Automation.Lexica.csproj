@@ -8,10 +8,10 @@
     <RepositoryUrl>https://github.com/aerawave/Awv.Automation</RepositoryUrl>
     <PackageTags>aerawave</PackageTags>
     <Description>Essentially an extension to the Awv.Lexica library which adds some more customized modifications to it that suit the needs of the Awv.Automation set of libraries.</Description>
-    <AssemblyVersion>1.0.3.0</AssemblyVersion>
-    <FileVersion>1.0.3.0</FileVersion>
-    <Version>1.0.3</Version>
-    <PackageReleaseNotes>Added modifier support.</PackageReleaseNotes>
+    <AssemblyVersion>1.0.4.0</AssemblyVersion>
+    <FileVersion>1.0.4.0</FileVersion>
+    <Version>1.0.4</Version>
+    <PackageReleaseNotes>Various fixes and updating Awv.Lexica</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
