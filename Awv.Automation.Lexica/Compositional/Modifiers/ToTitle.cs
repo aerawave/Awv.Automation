@@ -5,6 +5,7 @@ namespace Awv.Automation.Lexica.Compositional.Modifiers
 {
     public class ToTitle : IModifier
     {
+        public string Key { get; set; } = "T";
         public string Process(string value)
         {
             var words = new Regex(@"\w+").Matches(value);
@@ -21,5 +22,6 @@ namespace Awv.Automation.Lexica.Compositional.Modifiers
 
             return builder.ToString();
         }
+        public override string ToString() => nameof(ToUpper);
     }
 }
