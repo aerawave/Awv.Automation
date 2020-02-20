@@ -1,14 +1,17 @@
-﻿using Awv.Lexica.Compositional;
+﻿using Awv.Automation.Lexica.Compositional.Modifiers;
+using Awv.Lexica.Compositional;
 using Awv.Lexica.Compositional.Interface;
 using Awv.Lexica.Compositional.Lexigrams;
 using Awv.Lexica.Compositional.Lexigrams.Interface;
 using System;
+using System.Collections.Generic;
 using V8.Net;
 
 namespace Awv.Automation.Lexica.Compositional.Lexigrams
 {
     public class ConditionalLexigram : Composition, IIdLexigram
     {
+        public List<IModifier> Modifiers { get; set; } = new List<IModifier>();
         public string Id { get; set; }
         public CodeLexigram ChanceCode { get; set; }
 
@@ -40,9 +43,17 @@ namespace Awv.Automation.Lexica.Compositional.Lexigrams
         public override object GetValue(ICompositionEngine engine)
         {
             if (EvaluateChance(engine))
-                return Build(engine);
+                return ApplyModifiers(Build(engine));
             else
                 return "";
+        }
+
+        private string ApplyModifiers(string input)
+        {
+            var value = input;
+            foreach (var modifier in Modifiers)
+                value = modifier.Process(value);
+            return value;
         }
 
         public override string ToString()

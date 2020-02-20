@@ -1,8 +1,10 @@
 ﻿using Awv.Automation.Lexica.Compositional.Lexigrams;
+using Awv.Automation.Lexica.Compositional.Modifiers;
 using Awv.Lexica.Compositional;
 using Awv.Lexica.Compositional.Lexigrams;
 using Awv.Lexica.Compositional.Lexigrams.Interface;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -13,10 +15,17 @@ namespace Awv.Automation.Lexica.Compositional
         public const char TagStart = '#';
         public const char ConditionalStart = '{';
         public const char ConditionalEnd = '}';
+        public const char ModifierStart = ':';
         public const string TagValidChars = "_";
+        public const string ModifierValidChars = "_";
+
+        public Dictionary<string, IModifier> Modifiers { get; set; } = new Dictionary<string, IModifier>();
 
         public AutomationParser(string source) : base(source)
         {
+            Modifiers.Add("L", new ToLower());
+            Modifiers.Add("U", new ToUpper());
+            Modifiers.Add("T", new ToTitle());
         }
 
         public override char[] GetStringBreakers()
@@ -27,11 +36,6 @@ namespace Awv.Automation.Lexica.Compositional
         public virtual char[] GetTagBreakers()
         {
             return GetStringBreakers().Concat(new char[] { IdStart }).ToArray();
-        }
-
-        public virtual bool IsTagValidChar(char c)
-        {
-            return char.IsLetterOrDigit(c) || TagValidChars.Contains(c);
         }
 
         /// <summary>
@@ -57,7 +61,7 @@ namespace Awv.Automation.Lexica.Compositional
 
         private TagLexigram ReadTag()
         {
-            var tag = ReadTagName();
+            var tagMae = ReadTagName();
             var id = (string)null;
 
 
@@ -67,30 +71,21 @@ namespace Awv.Automation.Lexica.Compositional
                 Expect(IdEnd);
             }
 
-            return new TagLexigram(id, tag);
+            var tag = new TagLexigram(id, tagMae);
+
+            while (Expect(ModifierStart, true).HasValue)
+                tag.Modifiers.Add(ReadModifier());
+
+
+            return tag;
         }
 
         private string ReadTagName()
         {
-            var parsing = true;
-            var parsed = new StringBuilder();
             var breakers = GetTagBreakers();
-            while (parsing)
-            {
-                var ch = ReadChar();
-                parsing = !EndOfString;
-                if (breakers.Contains(ch) || !IsTagValidChar(ch))
-                {
-                    parsing = false;
-                }
-                else
-                {
-                    parsed.Append(ch);
-                }
-            }
-            if (!EndOfString) Back();
+            var tagName = ReadWhile(ch => !breakers.Contains(ch) && (TagValidChars.Contains(ch) || char.IsLetterOrDigit(ch)));
 
-            return parsed.ToString();
+            return tagName;
         }
 
         public ConditionalLexigram ReadConditional()
@@ -138,10 +133,27 @@ namespace Awv.Automation.Lexica.Compositional
                 Expect(IdEnd);
             }
 
+            while (Expect(ModifierStart, true).HasValue)
+                lexigram.Modifiers.Add(ReadModifier());
+
             if (Expect(CodeStart, true).HasValue)
                 lexigram.ChanceCode = ReadCode() as CodeLexigram;
 
             return lexigram;
         }
+
+        public IModifier ReadModifier()
+        {
+            var modifierKey = ReadWhile(ch => char.IsLetterOrDigit(ch) || ModifierValidChars.Contains(ch));
+            if (Modifiers.ContainsKey(modifierKey))
+            {
+                return Modifiers[modifierKey];
+            }
+            return null;
+        }
+
+
+
+
     }
 }

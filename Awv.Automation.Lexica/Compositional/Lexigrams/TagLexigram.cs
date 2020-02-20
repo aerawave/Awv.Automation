@@ -1,9 +1,13 @@
-﻿using Awv.Lexica.Compositional.Lexigrams;
+﻿using Awv.Automation.Lexica.Compositional.Modifiers;
+using Awv.Lexica.Compositional.Interface;
+using Awv.Lexica.Compositional.Lexigrams;
+using System.Collections.Generic;
 
 namespace Awv.Automation.Lexica.Compositional.Lexigrams
 {
-    public class TagLexigram : CodeLexigram
+    public class TagLexigram : CodeLexigram, IHasModifiers
     {
+        public List<IModifier> Modifiers { get; set; } = new List<IModifier>();
         public override string Id { get => base.Id?.Trim().Length == 0 ? Tag : base.Id; set => base.Id = value; }
         public override string Code
         {
@@ -18,10 +22,25 @@ namespace Awv.Automation.Lexica.Compositional.Lexigrams
             Tag = tag;
         }
 
+        public override object GetValue(ICompositionEngine engine)
+        {
+            return ApplyModifiers(base.GetValue(engine).ToString());
+        }
+
+        private string ApplyModifiers(string input)
+        {
+            var value = input;
+            foreach (var modifier in Modifiers)
+                value = modifier.Process(value);
+            return value;
+        }
+
 
         public static explicit operator TagLexigram(string tag) => new TagLexigram(null, tag);
 
         public override string ToString() =>
             $"#{Tag}{(Id != null ? (Id == Tag ? "()" : $"({Id})") : "")}";
+
+        public IEnumerable<IModifier> GetModifiers() => Modifiers;
     }
 }

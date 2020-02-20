@@ -8,15 +8,24 @@
     <RepositoryUrl>https://github.com/aerawave/Awv.Automation</RepositoryUrl>
     <PackageTags>aerawave</PackageTags>
     <Description>Essentially an extension to the Awv.Lexica library which adds some more customized modifications to it that suit the needs of the Awv.Automation set of libraries.</Description>
-    <AssemblyVersion>1.0.2.0</AssemblyVersion>
-    <FileVersion>1.0.2.0</FileVersion>
-    <Version>1.0.2</Version>
-    <PackageReleaseNotes>Fixed a tag parsing bug</PackageReleaseNotes>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <FileVersion>1.0.3.0</FileVersion>
+    <Version>1.0.3</Version>
+    <PackageReleaseNotes>Added modifier support.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Awv.Automation.Generation" Version="1.0.0" />
-    <PackageReference Include="Awv.Lexica" Version="1.0.7" />
+    <PackageReference Include="Awv.Automation.Generation" Version="1.0.2" />
+    <PackageReference Include="Awv.Lexica" Version="1.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="C:\Users\jaxki\.nuget\packages\awv.lexica\1.0.8\contentFiles\any\netcoreapp3.1\V8_Net_Proxy_x64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="C:\Users\jaxki\.nuget\packages\awv.lexica\1.0.8\contentFiles\any\netcoreapp3.1\V8_Net_Proxy_x86.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
