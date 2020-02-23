@@ -6,12 +6,12 @@
     <Company>Aerawave</Company>
     <Product>Awv.Automation.SocialMedia</Product>
     <Description>Used to automate posts to various social media platforms. Includes: Facebook</Description>
-    <PackageReleaseNotes>Added Twitter support.</PackageReleaseNotes>
+    <PackageReleaseNotes>Fixed File Client issues.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/aerawave/Awv.Automation</PackageProjectUrl>
     <RepositoryUrl>https://github.com/aerawave/Awv.Automation</RepositoryUrl>
-    <AssemblyVersion>1.0.2.0</AssemblyVersion>
-    <FileVersion>1.0.2.0</FileVersion>
-    <Version>1.0.2</Version>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <FileVersion>1.0.3.0</FileVersion>
+    <Version>1.0.3</Version>
   </PropertyGroup>
 
   <ItemGroup>

@@ -30,8 +30,8 @@ namespace Awv.Automation.SocialMedia.Twitter.Requests
             var guid = Guid.NewGuid();
 
             var jsonKey = $"{guid}.json";
-            var jsonDirectoryPath = Path.GetFullPath(Path.Combine(Client.TargetDirectory, TweetsDirectory));
-            var photosDirectoryPath = Path.GetFullPath(Path.Combine(Client.TargetDirectory, PhotosDirectory));
+            var jsonDirectoryPath = Path.Combine(Client.Output, TweetsDirectory);
+            var photosDirectoryPath = Path.Combine(Client.Output, PhotosDirectory);
             var jsonFilePath = Path.Combine(jsonDirectoryPath, $"{guid}.json");
 
             if (!Directory.Exists(jsonDirectoryPath)) Directory.CreateDirectory(jsonDirectoryPath);

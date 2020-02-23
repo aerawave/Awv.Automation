@@ -1,18 +1,19 @@
 ﻿using Awv.Automation.SocialMedia.Facebook.Posts.Interface;
 using Awv.Automation.SocialMedia.Facebook.Requests;
 using Awv.Automation.SocialMedia.Interface.PostStatuses;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Awv.Automation.SocialMedia.Facebook
 {
     public class FacebookFileClient : IFacebookClient
     {
-        public string TargetDirectory { get; set; }
+        public string Output { get; set; }
         public string Target { get; set; }
 
-        public FacebookFileClient(string target, string targetDirectory = ".")
+        public FacebookFileClient(string target, string output = ".")
         {
-            TargetDirectory = targetDirectory;
+            Output = Path.GetFullPath(output);
             Target = target;
         }
 

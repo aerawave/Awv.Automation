@@ -1,17 +1,18 @@
 ﻿using Awv.Automation.SocialMedia.Interface.PostStatuses;
 using Awv.Automation.SocialMedia.Twitter.Requests;
 using Awv.Automation.SocialMedia.Twitter.Tweets;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Awv.Automation.SocialMedia.Twitter
 {
     public class TwitterFileClient : ITwitterClient
     {
-        public string TargetDirectory { get; set; }
+        public string Output { get; set; }
 
-        public TwitterFileClient(string targetDirectory = ".")
+        public TwitterFileClient(string output = ".")
         {
-            TargetDirectory = targetDirectory;
+            Output = Path.GetFullPath(output);
         }
 
         public IPostStatus Send(ITweet tweet)

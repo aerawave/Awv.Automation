@@ -25,7 +25,10 @@ namespace Awv.Automation.Lexica.Compositional.Lexigrams
 
         public override object GetValue(ICompositionEngine engine)
         {
-            return ApplyModifiers(base.GetValue(engine).ToString());
+            var value = ApplyModifiers(base.GetValue(engine).ToString());
+            var parser = new AutomationParser(value);
+            var lexigram = parser.Transpile();
+            return lexigram.GetValue(engine);
         }
 
         private string ApplyModifiers(string input)

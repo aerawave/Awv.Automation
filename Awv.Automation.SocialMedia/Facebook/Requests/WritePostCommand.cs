@@ -40,7 +40,7 @@ namespace Awv.Automation.SocialMedia.Facebook.Requests
             var guid = Guid.NewGuid();
             var json = new JObject();
             var jsonKey = $"{guid}.json";
-            var jsonPath = Path.Combine(Client.TargetDirectory, FeedDirectory, jsonKey);
+            var jsonPath = Path.Combine(Client.Output, FeedDirectory, jsonKey);
             var directoryPath = Path.GetDirectoryName(jsonPath);
 
             if (!Directory.Exists(directoryPath))
@@ -70,7 +70,7 @@ namespace Awv.Automation.SocialMedia.Facebook.Requests
             var guid = Guid.NewGuid();
             var json = new JObject();
             var jsonKey = $"{guid}.json";
-            var directoryPath = Path.GetFullPath(Client.TargetDirectory, PhotosDirectory);
+            var directoryPath = Path.Combine(Client.Output, PhotosDirectory);
             var jsonPath = Path.Combine(directoryPath, jsonKey);
             var imagePath = Path.Combine(directoryPath, imageKey);
 
@@ -103,7 +103,7 @@ namespace Awv.Automation.SocialMedia.Facebook.Requests
             var json = new JObject();
             var jsonImageArray = new JArray();
             var jsonKey = $"{guid}.json";
-            var jsonPath = Path.Combine(Client.TargetDirectory, FeedDirectory, jsonKey);
+            var jsonPath = Path.Combine(Client.Output, FeedDirectory, jsonKey);
             var directoryPath = Path.GetDirectoryName(jsonPath);
 
             if (!Directory.Exists(directoryPath)) Directory.CreateDirectory(directoryPath);
